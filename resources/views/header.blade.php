@@ -13,7 +13,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('services') }}">Services</a>
                 </li>
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                         aria-expanded="false">
                         More
@@ -22,7 +22,18 @@
                         <li><a class="dropdown-item" href="{{ route('about') }}">About</a></li>
                         <li><a class="dropdown-item" href="{{ route('contact') }}">Contact</a></li>
                     </ul>
+                </li> --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        More
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('about') }}">About</a></li>
+                        <li><a class="dropdown-item" href="{{ route('contact') }}">Contact</a></li>
+                    </ul>
                 </li>
+
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
