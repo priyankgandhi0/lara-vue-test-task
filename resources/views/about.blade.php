@@ -3,9 +3,7 @@
 
 @section('content')
     <div class="container">
-        <dIv>
-            <texts-block />
-        </dIv>
+        <text-block></text-block>
         <div class="accordion" id="accordionExampleWr">
             <div class="accordion-item">
                 <h2 class="accordion-header">

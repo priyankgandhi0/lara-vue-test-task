@@ -10,4 +10,5 @@ window.bootstrap = bootstrap;
 const app = createApp({});
 app.component("TextBlock", TextBlock);
 app.component("ContactForm", ContactForm);
-app.mount("#app");
+// app.mount("#app");
+app.mount('#app-container');
