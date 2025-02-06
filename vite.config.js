@@ -25,4 +25,10 @@ export default defineConfig({
             "@": "/resources",
         },
     },
+    server: {
+        proxy: {
+            '/app': 'http://localhost',
+        },
+    },
+    
 });
