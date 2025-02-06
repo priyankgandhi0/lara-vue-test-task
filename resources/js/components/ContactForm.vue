@@ -4,6 +4,18 @@
             <h3><b>Contact Us</b></h3>
         </div>
         <div class="card-body p-4">
+            <!-- Message Feedback -->
+            <div
+                v-if="message"
+                :class="{
+                    alert: true,
+                    'alert-success': success === true,
+                    'alert-danger': success === false,
+                }"
+                role="alert"
+            >
+                {{ message }}
+            </div>
             <form @submit.prevent="submitForm">
                 <!-- Form Fields -->
                 <div class="mb-3">
@@ -142,19 +154,6 @@
                     Submit
                 </button>
             </form>
-
-            <!-- Message Feedback -->
-            <div
-                v-if="message"
-                :class="{
-                    alert: true,
-                    'alert-success': success === true,
-                    'alert-danger': success === false,
-                }"
-                role="alert"
-            >
-                {{ message }}
-            </div>
         </div>
     </div>
 </template>
@@ -224,10 +223,15 @@ export default {
                     },
                 });
 
-                this.success = true;
-                this.message = response.data.msg;
-                alert(response.data.msg);
-                this.resetForm();
+                console.log(response.data.msg);
+                if (response.data.status === 0) {
+                    this.success = false;
+                    this.message = response.data.msg;
+                } else {
+                    this.success = true;
+                    this.message = response.data.msg;
+                    this.resetForm();
+                }
             } catch (error) {
                 this.success = false;
                 if (error.response && error.response.data.msg) {

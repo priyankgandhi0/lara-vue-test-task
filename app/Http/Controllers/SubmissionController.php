@@ -15,29 +15,50 @@ class SubmissionController extends Controller
     {
         $response = ['status' => 0, 'msg' => '', 'data' => []];
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|min:2|max:10',
-            'email' => 'required|email|not_in:example@gmail.com',
-            'phone' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
-            'message' => 'required|string|min:10',
-            'street' => 'required|string',
-            'state' => 'required|string',
-            'zip' => 'required|string',
-            'country' => 'required|string',
-            'images' => 'nullable|array',
-            'images.*' => 'nullable|mimes:jpg,jpeg|max:2048',
-            'files' => 'nullable|array',
-            'files.*' => 'nullable|mimes:pdf|max:2048',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required|string|min:2|max:10',
+        //     'email' => 'required|email|not_in:example@gmail.com',
+        //     'phone' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
+        //     'message' => 'required|string|min:10',
+        //     'street' => 'required|string',
+        //     'state' => 'required|string',
+        //     'zip' => 'required|string',
+        //     'country' => 'required|string',
+        //     'images' => 'nullable|array',
+        //     'images.*' => 'nullable|mimes:jpg,jpeg|max:2048',
+        //     'files' => 'nullable|array',
+        //     'files.*' => 'nullable|mimes:pdf|max:2048',
+        // ]);
 
-        if ($validator->fails()) {
-            $response['msg'] = $validator->errors()->first();
-            return response()->json($response);
-        }
+        // if ($validator->fails()) {
+        //     $response['msg'] = $validator->errors()->first();
+        //     return response()->json($response);
+        // }
 
         $sanitizedInput = filter_var_array($request->all(), FILTER_SANITIZE_STRING);
 
         try {
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|min:2|max:10',
+                'email' => 'required|email|not_in:example@gmail.com',
+                'phone' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
+                'message' => 'required|string|min:10',
+                'street' => 'required|string',
+                'state' => 'required|string',
+                'zip' => 'required|string',
+                'country' => 'required|string',
+                'images' => 'nullable|array',
+                'images.*' => 'nullable|mimes:jpg,jpeg|max:2048',
+                'files' => 'nullable|array',
+                'files.*' => 'nullable|mimes:pdf|max:2048',
+            ]);
+
+            if ($validator->fails()) {
+                $response['msg'] = $validator->errors()->first();
+                return response()->json($response);
+            }
+
             $submission = Submission::create([
                 'name' => $sanitizedInput['name'],
                 'email' => $sanitizedInput['email'],
